@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><p><strong>Version 1.0</strong> | Portfolio Analytics Dashboard</p></title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="sidebar">
+    <h2>📈 InvestTrack</h2>
+
+    <a href="#">Dashboard</a>
+    <a href="#">Portfolio</a>
+    <a href="#">Analytics</a>
+    <a href="#">Markets</a>
+    <a href="#">Settings</a>
+</div>
+
+<nav>
+    <span>📈 InvestTrack Pro | Portfolio Analytics Platform</span>
+
+    <button onclick="toggleDarkMode()" id="darkBtn">
+        🌙 Dark Mode
+    </button>
+</nav>
+<div class="main-content">
+
+<div class="hero">
+    <h1>Investment Analytics Dashboard</h1>
+    <h2 id="welcomeMessage">
+    Welcome Back 👋
+</h2>
+
+    <p>
+        Monitor portfolio performance, track investments,
+        and analyze market exposure in one place.
+    </p>
+    <h3 id="clock"></h3>
+</div>
+
+<div class="score-container">
+
+    <div class="score-circle">
+        <span>84</span>
+    </div>
+
+    <h3>Portfolio Health Score</h3>
+
+</div>
+<div class="dashboard-header">
+
+    <div>
+        <h3>📅 Date</h3>
+        <p id="todayDate"></p>
+    </div>
+
+    <div>
+        <h3>💰 Net Worth</h3>
+        <p>₹{{ value }}</p>
+    </div>
+
+    <div>
+        <h3>📊 Portfolio Status</h3>
+        <p>Healthy</p>
+    </div>
+
+</div>
+<div style="text-align:center; margin:20px 0;">
+
+    <button class="report-btn">
+        📄 Download Portfolio Report
+    </button>
+
+</div>
+
+<div class="ticker">
+    <marquee>
+        NIFTY 50 ▲ 24,850 (+0.8%) |
+        SENSEX ▲ 81,200 (+0.7%) |
+        BANK NIFTY ▲ 52,000 (+1.1%) |
+        IT INDEX ▲ 1.4%
+    </marquee>
+</div>
+<h2>Market Watchlist</h2>
+<div class="watchlist">
+ 
+HTML
+<div class="stock-card">
+
+    <h3>RELIANCE</h3>
+
+    <h2>₹2,850</h2>
+
+    <p class="gain">▲ +2.4%</p>
+
+</div>
+ 
+<div class="stock-card">
+<h3>TCS</h3>
+<h2>₹4,250</h2>
+<p class="gain">▲ +1.8%</p>
+</div>
+ 
+<div class="stock-card">
+<h3>ICICI BANK</h3>
+<h2>₹1,420</h2>
+<p class="loss">▼ -0.6%</p>
+</div>
+ 
+</div>
+
+
+<div class="container">
+
+    <!-- Paste watchlist here -->
+
+    <form method="POST">
+
+    
+
+
+<div class="container">
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="stock_name"
+            placeholder="Stock Name"
+            required
+        >
+
+        <input
+            type="number"
+            name="shares"
+            placeholder="Shares"
+            required
+        >
+
+        <input
+            type="number"
+            name="price"
+            placeholder="Buy Price"
+            required
+        >
+
+        <button type="submit">
+            Add Stock
+        </button>
+
+    </form>
+
+    <div class="cards">
+
+        <div class="cards">
+     <h2>Portfolio Overview</h2>
+
+    <div class="card">
+        <h3>Total Investment</h3>
+        <h2>₹{{ investment }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Current Value</h3>
+        <h2>₹{{ value }}</h2>
+    </div>
+
+    <div class="card profit">
+        <h3>Total Profit</h3>
+        <h2>₹{{ profit }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Total Holdings</h3>
+        <h2>{{ stocks|length }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Portfolio Health</h3>
+        <h2>84/100</h2>
+    </div>
+
+    <div class="card">
+        <h3>📈 Top Gainer</h3>
+        <h2>Infosys</h2>
+        <p>+12.4%</p>
+    </div>
+
+    <div class="card">
+        <h3>📉 Top Loser</h3>
+        <h2>Tata Motors</h2>
+        <p>-3.8%</p>
+    </div>
+
+</div>
+    <div class="stats-bar">
+
+        <div class="stat-box">
+            <h3>{{ stocks|length }}</h3>
+            <p>Companies Tracked</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>8</h3>
+            <p>Sectors Covered</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>12%</h3>
+            <p>Expected Return</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>Moderate</h3>
+            <p>Risk Profile</p>
+        </div>
+
+    </div>
+    <div class="stats-bar">
+
+    <div class="stat-box">
+        <h3>{{ stocks|length }}</h3>
+        <p>Companies Tracked</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>8</h3>
+        <p>Sectors Covered</p>
+    </div>
+
+</div>
+
+<input
+    type="text"
+    id="searchInput"
+    placeholder="🔍 Search company..."
+>
+
+    <h2>Portfolio Holdings</h2>
+
+    <table>
+
+        <tr>
+            <th>Company</th>
+            <th>Shares</th>
+            <th>Buy Price</th>
+        </tr>
+
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock[0] }}</td>
+            <td>{{ stock[1] }}</td>
+            <td>₹{{ stock[2] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <h2>Performance Analytics</h2>
+    
+<div class="chart">
+
+    <div class="bar-container">
+        <div class="bar" style="height:80px;"></div>
+        <span>Jan</span>
+    </div>
+
+    <div class="bar-container">
+        <div class="bar" style="height:120px;"></div>
+        <span>Feb</span>
+    </div>
+
+    <div class="bar-container">
+        <div class="bar" style="height:170px;"></div>
+        <span>Mar</span>
+    </div>
+
+    <div class="bar-container">
+        <div class="bar" style="height:220px;"></div>
+        <span>Apr</span>
+    </div>
+
+    <div class="bar-container">
+        <div class="bar" style="height:260px;"></div>
+        <span>May</span>
+    </div>
+
+</div>
+
+
+<h2>Sector Allocation</h2>
+<h2>Portfolio Allocation</h2>
+
+<div class="pie-chart"></div>
+
+<div class="allocation-legend">
+    <p>🔵 Technology - 35%</p>
+    <p>🟢 Banking - 25%</p>
+    <p>🟠 Energy - 20%</p>
+    <p>🟣 Healthcare - 10%</p>
+    <p>🔴 Consumer - 10%</p>
+</div>
+
+    <h2 style="margin-top:40px;">Sector Allocation</h2>
+
+    <table>
+        <tr>
+            <th>Sector</th>
+            <th>Allocation</th>
+        </tr>
+
+        <tr>
+            <td>Technology</td>
+            <td>35%</td>
+        </tr>
+
+        <tr>
+            <td>Banking</td>
+            <td>25%</td>
+        </tr>
+
+        <tr>
+            <td>Energy</td>
+            <td>20%</td>
+        </tr>
+
+        <tr>
+            <td>Healthcare</td>
+            <td>10%</td>
+        </tr>
+
+        <tr>
+            <td>Consumer</td>
+            <td>10%</td>
+        </tr>
+
+    </table>
+    <div class="quote-box">
+
+    <h3>💡 Quote of the Day</h3>
+
+    <p>
+        "The stock market is a device for transferring money
+        from the impatient to the patient."
+    </p>
+
+    <strong>– Warren Buffett</strong>
+
+</div>
+
+    <footer>
+        <p>© 2026 Manas Pakhare</p>
+        <p>Investment Portfolio Management System</p>
+    </footer>
+
+</div>
+<script>
+
+function toggleDarkMode(){
+    document.body.classList.toggle("dark");
+}
+
+</script>
+</div>
+<script>
+
+let userName = prompt("Enter Your Name:");
+
+if(userName){
+
+    document.getElementById("welcomeMessage")
+    .innerHTML =
+    "Welcome Back, " + userName + " 👋";
+
+}
+
+</script>
+<script>
+
+const count =
+document.querySelectorAll("table tr").length - 1;
+
+document.getElementById("companyCount")
+.innerHTML = count;
+
+</script>
+
+</body>
+</html>
